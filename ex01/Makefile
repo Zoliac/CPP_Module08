@@ -1,0 +1,29 @@
+NAME = Span
+
+OBJ_DIR = obj
+
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+RM = rm -f
+
+SRCS = main.cpp Span.cpp
+OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	$(RM) -r $(OBJ_DIR)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
